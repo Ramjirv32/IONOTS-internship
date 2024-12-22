@@ -39,9 +39,64 @@ export default function ProjectList() {
     }
   };
 
+  const getProjectTasks = (projectName) => {
+    const tasksList = {
+      'Frontend Development': [
+        { id: 1, title: 'Setup Project', points: 20 },
+        { id: 2, title: 'Create UI Components', points: 20 },
+        { id: 3, title: 'Implement Responsive Design', points: 20 },
+        { id: 4, title: 'Add Animations', points: 20 },
+        { id: 5, title: 'Testing & Deployment', points: 20 }
+      ],
+      'Backend API': [
+        { id: 1, title: 'Setup Server', points: 20 },
+        { id: 2, title: 'Create API Routes', points: 20 },
+        { id: 3, title: 'Database Integration', points: 20 },
+        { id: 4, title: 'Authentication', points: 20 },
+        { id: 5, title: 'Testing & Documentation', points: 20 }
+      ]
+      // ... other project tasks
+    };
+    return tasksList[projectName] || [];
+  };
+
   const handleProjectClick = (project) => {
     setSelectedProject(project);
+    setTasks(getProjectTasks(project.name).map(task => ({
+      ...task,
+      completed: false,
+      progress: 0
+    })));
     setShowTaskModal(true);
+  };
+
+  const handleTaskUpdate = async (taskId) => {
+    const updatedTasks = tasks.map(task => 
+      task.id === taskId ? { ...task, progress: Math.min(task.progress + 20, 100) } : task
+    );
+    setTasks(updatedTasks);
+
+    const totalProgress = Math.floor(updatedTasks.reduce((sum, task) => sum + task.progress, 0) / updatedTasks.length);
+    const score = updatedTasks.reduce((sum, task) => sum + (task.progress === 100 ? task.points : 0), 0);
+
+    try {
+      await axios.post(`${API_URL}/api/progress/update`, {
+        project_id: selectedProject.id,
+        candidate_id: auth.currentUser.uid,
+        progress: totalProgress,
+        score
+      });
+
+      setSelectedProject(prev => ({
+        ...prev,
+        progress: totalProgress,
+        score
+      }));
+
+      await fetchProjects();
+    } catch (error) {
+      console.error('Error updating task:', error);
+    }
   };
 
   const ProjectCard = ({ project }) => (
@@ -143,6 +198,39 @@ export default function ProjectList() {
                   ✕
                 </button>
               </div>
+
+              <div className="space-y-4 mb-6">
+                {tasks.map(task => (
+                  <div 
+                    key={task.id}
+                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800/50 transition-colors"
+                  >
+                    <div className="flex-1">
+                      <p className={`text-sm ${task.progress === 100 ? 'text-gray-500 line-through' : 'text-white'}`}>
+                        {task.title}
+                      </p>
+                      <div className="flex justify-between items-center mt-1">
+                        <p className="text-xs text-gray-500">{task.points} points</p>
+                        <p className="text-xs text-gray-500">{task.progress}% complete</p>
+                      </div>
+                      <div className="w-full bg-gray-700 rounded-full h-1 mt-2">
+                        <div 
+                          className="bg-blue-500 h-1 rounded-full transition-all duration-300"
+                          style={{ width: `${task.progress}%` }}
+                        />
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => handleTaskUpdate(task.id)}
+                      disabled={task.progress >= 100}
+                      className="px-3 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600 transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed"
+                    >
+                      Update
+                    </button>
+                  </div>
+                ))}
+              </div>
+
               <div className="text-center text-gray-400">
                 Current Score: <span className="text-yellow-500 font-bold">{selectedProject.score}</span>
               </div>

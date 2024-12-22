@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase';
 import axios from 'axios';
@@ -54,10 +53,57 @@ export default function ProjectList() {
         { id: 3, title: 'Database Integration', points: 20 },
         { id: 4, title: 'Authentication', points: 20 },
         { id: 5, title: 'Testing & Documentation', points: 20 }
+      ],
+      'Mobile App Development': [
+        { id: 1, title: 'Setup React Native Environment', points: 20 },
+        { id: 2, title: 'Implement User Authentication', points: 20 },
+        { id: 3, title: 'Create Offline Data Storage', points: 20 },
+        { id: 4, title: 'Implement Real-time Sync', points: 20 },
+        { id: 5, title: 'Deploy to App Stores', points: 20 }
+      ],
+      'Data Analytics Dashboard': [
+        { id: 1, title: 'Setup Dashboard Layout', points: 20 },
+        { id: 2, title: 'Implement Data Visualization', points: 20 },
+        { id: 3, title: 'Add Filtering System', points: 20 },
+        { id: 4, title: 'Create Export Functionality', points: 20 },
+        { id: 5, title: 'Optimize Performance', points: 20 }
+      ],
+      'E-commerce Platform': [
+        { id: 1, title: 'Create Product Catalog', points: 20 },
+        { id: 2, title: 'Implement Shopping Cart', points: 20 },
+        { id: 3, title: 'Add Payment Integration', points: 20 },
+        { id: 4, title: 'Setup Order Management', points: 20 },
+        { id: 5, title: 'Deploy and Test', points: 20 }
+      ],
+      'Security Audit': [
+        { id: 1, title: 'Security Assessment', points: 20 },
+        { id: 2, title: 'Vulnerability Testing', points: 20 },
+        { id: 3, title: 'Fix Security Issues', points: 20 },
+        { id: 4, title: 'Implement Best Practices', points: 20 },
+        { id: 5, title: 'Documentation', points: 20 }
+      ],
+      'DevOps Pipeline': [
+        { id: 1, title: 'Setup CI/CD', points: 20 },
+        { id: 2, title: 'Configure Automation', points: 20 },
+        { id: 3, title: 'Implement Testing', points: 20 },
+        { id: 4, title: 'Monitoring Setup', points: 20 },
+        { id: 5, title: 'Documentation', points: 20 }
+      ],
+      'Machine Learning Model': [
+        { id: 1, title: 'Data Collection', points: 20 },
+        { id: 2, title: 'Model Training', points: 20 },
+        { id: 3, title: 'Model Evaluation', points: 20 },
+        { id: 4, title: 'API Integration', points: 20 },
+        { id: 5, title: 'Deployment', points: 20 }
       ]
-      // ... other project tasks
     };
-    return tasksList[projectName] || [];
+    return tasksList[projectName] || [
+      { id: 1, title: 'Planning and Setup', points: 20 },
+      { id: 2, title: 'Core Implementation', points: 20 },
+      { id: 3, title: 'Testing', points: 20 },
+      { id: 4, title: 'Documentation', points: 20 },
+      { id: 5, title: 'Deployment', points: 20 }
+    ];
   };
 
   const handleProjectClick = (project) => {

@@ -8,7 +8,15 @@ const app = express();
 const port = process.env.PORT || 8001;
 
 // Middleware
-app.use(cors());
+const corsOptions = {
+  origin: [
+    'http://localhost:3000',
+    'https://ionots-internship-git-main-ramjib2311-gmailcoms-projects.vercel.app'
+  ],
+  credentials: true
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Database configuration

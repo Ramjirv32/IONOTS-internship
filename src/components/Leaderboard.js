@@ -39,7 +39,7 @@ export default function Leaderboard({ isOpen, onClose }) {
 
   const fetchLeaderboard = async () => {
     try {
-      const response = await axios.get('http://localhost:8001/api/leaderboard');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/leaderboard`);
       setLeaders(response.data);
       
       // Show achievement toast if user is in top 3

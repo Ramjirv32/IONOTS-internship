@@ -61,13 +61,7 @@ export default function Leaderboard({ isOpen, onClose }) {
       }
     } catch (error) {
       console.error('Error fetching leaderboard:', error);
-      Swal.fire({
-        title: 'Error',
-        text: 'Failed to load leaderboard data',
-        icon: 'error',
-        background: '#1f2937',
-        color: '#fff'
-      });
+      setError('Failed to load leaderboard data');
     } finally {
       setLoading(false);
     }

@@ -6,7 +6,6 @@ import Leaderboard from './Leaderboard';
 export default function ProjectList() {
   const [projects, setProjects] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState(null);
   const [newProject, setNewProject] = useState({
     title: '',
     description: '',
@@ -24,9 +23,6 @@ export default function ProjectList() {
   });
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [showTaskModal, setShowTaskModal] = useState(false);
-  const [tasks, setTasks] = useState([]);
-  const [showLeaderboard, setShowLeaderboard] = useState(false);
 
   const fetchProjects = async () => {
     try {

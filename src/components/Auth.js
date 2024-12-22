@@ -175,9 +175,9 @@ export default function Auth() {
         >
           <p>By continuing, you agree to our</p>
           <div className="flex justify-center gap-4 mt-2">
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <button className="text-gray-400 hover:text-white transition-colors">Terms of Service</button>
             <span>•</span>
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+            <button className="text-gray-400 hover:text-white transition-colors">Privacy Policy</button>
           </div>
         </div>
       </div>

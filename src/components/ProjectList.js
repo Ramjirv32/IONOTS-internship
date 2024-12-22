@@ -4,7 +4,6 @@ import axios from 'axios';
 import Leaderboard from './Leaderboard';
 
 const API_URL = 'https://ionots-internship.vercel.app';
-
 export default function ProjectList() {
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);

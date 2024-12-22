@@ -3,7 +3,7 @@ import { auth } from '../firebase';
 import axios from 'axios';
 import Leaderboard from './Leaderboard';
 
-const API_URL = 'https://ionots-internship-git-main-ramjib2311-gmailcoms-projects.vercel.app';
+const API_URL = 'https://ionots-internship.vercel.app';
 
 export default function ProjectList() {
   const [projects, setProjects] = useState([]);

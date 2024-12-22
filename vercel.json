@@ -18,10 +18,13 @@
     },
     {
       "src": "/(.*)",
-      "dest": "build/$1"
+      "dest": "/index.html"
     }
   ],
   "env": {
     "POSTGRES_URL": "postgres://postgres.mzuwguvnaonviwrdilpl:NYicM5MZnPP4KioK@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres"
-  }
+  },
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 } 

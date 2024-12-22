@@ -3,7 +3,7 @@ import { auth } from '../firebase';
 import axios from 'axios';
 import Leaderboard from './Leaderboard';
 
-const API_URL = 'https://ionots-internship-git-main-ramjib2311-gmailcoms-projects.vercel.app';
+const API_URL = process.env.REACT_APP_API_URL || 'https://ionots-internship.vercel.app';
 
 export default function ProjectList() {
   const [projects, setProjects] = useState([]);
@@ -32,7 +32,8 @@ export default function ProjectList() {
 
   const fetchProjects = async () => {
     try {
-      const response = await axios.get(`${API_URL}/api/projects`);
+      const userId = auth.currentUser.uid;
+      const response = await axios.get(`${API_URL}/api/projects?userId=${userId}`);
       setProjects(response.data);
     } catch (error) {
       console.error('Error fetching projects:', error);
@@ -60,7 +61,7 @@ export default function ProjectList() {
         await new Promise(resolve => setTimeout(resolve, 500));
       }
 
-      await axios.post('http://localhost:8001/api/projects', {
+      await axios.post(`${API_URL}/api/projects`, {
         name: newProject.title,
         description: newProject.description,
         status: 'Pending',

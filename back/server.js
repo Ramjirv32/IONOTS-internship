@@ -11,7 +11,7 @@ const port = process.env.PORT || 8001;
 const corsOptions = {
   origin: [
     'http://localhost:3000',
-    'https://ionots-internship-git-main-ramjib2311-gmailcoms-projects.vercel.app'
+    'https://ionots-internship.vercel.app',
   ],
   credentials: true
 };

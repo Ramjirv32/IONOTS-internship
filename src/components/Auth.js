@@ -42,7 +42,7 @@ export default function Auth() {
       const result = await signInWithPopup(auth, provider);
       
       // Save user data
-      await axios.post('http://localhost:8001/api/users', {
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/users`, {
         uid: result.user.uid,
         email: result.user.email,
         displayName: result.user.displayName,
@@ -59,7 +59,7 @@ export default function Auth() {
       const result = await signInWithPopup(auth, provider);
       
       // Save user data
-      await axios.post('http://localhost:8001/api/users', {
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/users`, {
         uid: result.user.uid,
         email: result.user.email,
         displayName: result.user.displayName,
